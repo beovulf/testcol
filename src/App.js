@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as HashRouter, Route, Switch } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import Landing from "./components/layout/Landing";
@@ -25,7 +25,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <Router>
+        <HashRouter basename="/">
           <Layout>
             <Navbar />
             <Switch>
@@ -34,7 +34,7 @@ const App = () => {
             </Switch>
             <Footer />
           </Layout>
-        </Router>
+        </HashRouter>
       </PersistGate>
     </Provider>
   );
