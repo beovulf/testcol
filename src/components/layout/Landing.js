@@ -5,9 +5,10 @@ const { Content, Sider } = Layout;
 
 const Landing = () => {
   return (
-    <Content style={{ padding: "0 50px" }}>
+    <Content style={{ padding: "0 15px" }}>
       <Layout style={{ padding: "24px 0", background: "#fff" }}>
         <Sider
+          theme="dark"
           width={200}
           style={{ background: "#fff" }}
           breakpoint="lg"

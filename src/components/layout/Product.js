@@ -1,13 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Layout, Carousel, Row, Col, Select, Button, Card } from "antd";
+import {
+  Layout,
+  Carousel,
+  Row,
+  Col,
+  Select,
+  Button,
+  Card,
+  PageHeader
+} from "antd";
 import Spinner from "./Spinner";
 import { updateCart } from "../../actions/cart";
 const { Content } = Layout;
 const { Option } = Select;
 
 const Product = ({ product: { loading, product }, updateCart }) => {
+  const [description, setDescription] = useState(false);
+
   const handleBuy = () => {
     updateCart(product);
   };
@@ -16,16 +27,13 @@ const Product = ({ product: { loading, product }, updateCart }) => {
     <Spinner />
   ) : (
     <Content style={{ padding: "0 24px", minHeight: 280 }}>
-      <Row gutter={15}>
-        <Col span={8}>
+      <Row gutter={30} type="flex">
+        <Col span={24} order={2} md={{ span: 8, order: 1 }}>
           <Carousel
             customPaging={function(i) {
               return (
-                <a>
-                  <img
-                    src={product.gallery[i].src}
-                    style={{ width: "100px" }}
-                  />
+                <a style={{ display: "block", width: "100%" }}>
+                  <img src={product.gallery[i].src} style={{ width: "100%" }} />
                 </a>
               );
             }}
@@ -37,20 +45,26 @@ const Product = ({ product: { loading, product }, updateCart }) => {
             ))}
           </Carousel>
         </Col>
-        <Col span={16}>
+        <Col span={24} order={1} md={{ span: 15, order: 2 }}>
           <Row gutter={15}>
-            <h1>{product.title}</h1>
+            <h1 class="header">{product.title}</h1>
           </Row>
-          <Row gutter={15}>
-            <Card>
-              <Col span={8}>
-                <p>{product.price.new} kr</p>
-                <small>{product.price.old} kr</small>
+          <Row gutter={16} type="flex" style={{ flexWrap: "wrap" }}>
+            <Card style={{ maxWidth: "500px", width: "100%" }}>
+              <Col span={12} md={4} style={{ marginBottom: "15px" }}>
+                <p style={{ fontWeight: "700", marginBottom: "0" }}>
+                  {product.price.new} kr
+                </p>
+                <s style={{ fontSize: "12px" }}>{product.price.old} kr</s>
               </Col>
-              <Col span={8}>
+              <Col
+                span={12}
+                md={4}
+                style={{ textAlign: "left", marginBottom: "15px" }}
+              >
                 <Select
                   defaultValue={product.variants[0]}
-                  style={{ width: 120 }}
+                  style={{ width: 110 }}
                 >
                   {product.variants.map(element => (
                     <Option value={element}>
@@ -59,25 +73,45 @@ const Product = ({ product: { loading, product }, updateCart }) => {
                   ))}
                 </Select>
               </Col>
-              <Col span={8}>
-                <Button type="primary" onClick={handleBuy}>
+              <Col
+                span={24}
+                md={{ span: 8, offset: 8 }}
+                style={{ textAlign: "left" }}
+              >
+                <Button type="primary" size="large" block onClick={handleBuy}>
                   Buy
                 </Button>
               </Col>
             </Card>
           </Row>
-          <Row gutter={15}>
+          <Row gutter={15} style={{ marginTop: "30px" }}>
             <Col>
-              <div dangerouslySetInnerHTML={{ __html: product.description }} />
-              <Button type="secondary">Read more</Button>
+              <div
+                dangerouslySetInnerHTML={{ __html: product.description }}
+                style={{
+                  height: !description ? "145px" : "100%",
+                  overflow: "hidden",
+                  marginBottom: "15px"
+                }}
+              />
+              <Button
+                type="secondary"
+                onClick={() => setDescription(!description)}
+                style={{ marginBottom: "30px" }}
+              >
+                {!description ? "Read more" : "Read less"}
+              </Button>
             </Col>
           </Row>
         </Col>
       </Row>
-      <Row gutter={15}>
+      <Row gutter={30} type="flex">
         {product.inspirations.map(element => (
-          <Col span={8}>
-            <Card title={element.title}>
+          <Col span={24} md={8} style={{ marginBottom: "15px" }}>
+            <Card
+              title={element.title}
+              style={{ height: "100%", backgroundImage: "url('paper1.jpg')" }}
+            >
               <p>{element.description}</p>
             </Card>
           </Col>

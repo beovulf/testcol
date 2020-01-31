@@ -11,14 +11,21 @@ const MiniCart = ({ cart: { cart, loading } }) => {
     <Spinner />
   ) : (
     <Fragment>
-      <Icon type="shopping-cart" style={{ color: "#FFF", fontSize: "20px" }} />
-      <span style={{ color: "#FFF" }}>{cart.length}st</span>{" "}
-      {cart.length && (
-        <span style={{ color: "#FFF" }}>
-          {cart.map(element => element.price.new).reduce((a, b) => a + b)} kr
+      <Icon
+        type="shopping-cart"
+        style={{ fontSize: "20px", marginRight: "5px" }}
+      />
+      <span>{cart.length}st</span>{" "}
+      {cart.length > 0 && (
+        <span>
+          - {cart.map(element => element.price.new).reduce((a, b) => a + b)} kr
         </span>
       )}{" "}
-      <Button type="secondary" onClick={() => setShowCart(!showCart)}>
+      <Button
+        type="dashed"
+        onClick={() => setShowCart(!showCart)}
+        style={{ marginLeft: "5px" }}
+      >
         Cart
       </Button>
       <Drawer
