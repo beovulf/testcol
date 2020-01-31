@@ -17,7 +17,7 @@ const MiniCart = ({ cart: { cart, loading } }) => {
       />
       <span>{cart.length}st</span>{" "}
       {cart.length > 0 && (
-        <span>
+        <span className="price-summary">
           - {cart.map(element => element.price.new).reduce((a, b) => a + b)} kr
         </span>
       )}{" "}

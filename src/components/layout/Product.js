@@ -1,16 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import {
-  Layout,
-  Carousel,
-  Row,
-  Col,
-  Select,
-  Button,
-  Card,
-  PageHeader
-} from "antd";
+import { Layout, Carousel, Row, Col, Select, Button, Card } from "antd";
 import Spinner from "./Spinner";
 import { updateCart } from "../../actions/cart";
 const { Content } = Layout;
@@ -26,33 +17,44 @@ const Product = ({ product: { loading, product }, updateCart }) => {
   return loading || product === null ? (
     <Spinner />
   ) : (
-    <Content style={{ padding: "0 24px", minHeight: 280 }}>
+    <Content style={{ padding: "0 24px", minHeight: 280 }} className="hproduct">
       <Row gutter={30} type="flex">
         <Col span={24} order={2} md={{ span: 8, order: 1 }}>
           <Carousel
             customPaging={function(i) {
               return (
                 <a style={{ display: "block", width: "100%" }}>
-                  <img src={product.gallery[i].src} style={{ width: "100%" }} />
+                  <img
+                    src={product.gallery[i].src}
+                    style={{ width: "100%" }}
+                    className="product-thumb"
+                  />
                 </a>
               );
             }}
           >
             {product.gallery.map(element => (
               <div>
-                <img src={element.src} alt={element.alt} />
+                <img
+                  src={element.src}
+                  alt={element.alt}
+                  className="product-thumb"
+                />
               </div>
             ))}
           </Carousel>
         </Col>
         <Col span={24} order={1} md={{ span: 15, order: 2 }}>
           <Row gutter={15}>
-            <h1 class="header">{product.title}</h1>
+            <h1 class="header product-title">{product.title}</h1>
           </Row>
           <Row gutter={16} type="flex" style={{ flexWrap: "wrap" }}>
             <Card style={{ maxWidth: "500px", width: "100%" }}>
               <Col span={12} md={4} style={{ marginBottom: "15px" }}>
-                <p style={{ fontWeight: "700", marginBottom: "0" }}>
+                <p
+                  style={{ fontWeight: "700", marginBottom: "0" }}
+                  className="product-price"
+                >
                   {product.price.new} kr
                 </p>
                 <s style={{ fontSize: "12px" }}>{product.price.old} kr</s>
@@ -88,6 +90,7 @@ const Product = ({ product: { loading, product }, updateCart }) => {
             <Col>
               <div
                 dangerouslySetInnerHTML={{ __html: product.description }}
+                className="product-description"
                 style={{
                   height: !description ? "145px" : "100%",
                   overflow: "hidden",

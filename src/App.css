@@ -15,15 +15,6 @@
   display: flex !important;
 }
 
-.slick-dots-bottom li {
-  width: 100%;
-  margin: 0 1%;
-}
-
-h1.header {
-  font-size: 38px;
-}
-
 .ant-layout {
   max-width: 1440px;
   margin: 0 auto;
@@ -35,4 +26,19 @@ h1.header {
 
 .ant-layout-sider-zero-width-trigger {
   display: none;
+}
+
+.slick-dots-bottom li {
+  width: 100%;
+  margin: 0 1%;
+}
+
+h1.header {
+  font-size: 38px;
+}
+
+@media (max-width: 767px) {
+  .price-summary {
+    display: none;
+  }
 }
