@@ -82,6 +82,32 @@ const getProduct = (id = 1) => {
   });
 };
 
+// Get cart
+
+const getCart = () => {
+  // return axios.get(`/api/cart`);
+
+  return new Promise(function(resolve, reject) {
+    setTimeout(() => {
+      resolve([]);
+    }, 500);
+  });
+};
+
+// Update cart
+
+const updateCart = product => {
+  // return axios.post(`/api/cart`);
+
+  return new Promise(function(resolve, reject) {
+    setTimeout(() => {
+      resolve(product);
+    }, 500);
+  });
+};
+
 export default {
-  getProduct
+  getProduct,
+  getCart,
+  updateCart
 };

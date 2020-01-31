@@ -5,6 +5,7 @@ import Footer from "./components/layout/Footer";
 import Landing from "./components/layout/Landing";
 import NotFound from "./components/layout/NotFound";
 import { getProduct } from "./actions/product";
+import { getCart } from "./actions/cart";
 import { PersistGate } from "redux-persist/integration/react";
 
 // Redux
@@ -18,6 +19,7 @@ import { Layout } from "antd";
 const App = () => {
   useEffect(() => {
     store.dispatch(getProduct());
+    store.dispatch(getCart());
   }, []);
 
   return (

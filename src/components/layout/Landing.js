@@ -1,14 +1,9 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
 import { Layout, Menu } from "antd";
 import Product from "./Product";
 const { Content, Sider } = Layout;
 
-const Landing = ({ isAuthenticated }) => {
-  if (isAuthenticated) {
-    return <Redirect to="/dashboard" />;
-  }
-
+const Landing = () => {
   return (
     <Content style={{ padding: "0 50px" }}>
       <Layout style={{ padding: "24px 0", background: "#fff" }}>

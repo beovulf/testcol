@@ -3,10 +3,15 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Layout, Carousel, Row, Col, Select, Button, Card } from "antd";
 import Spinner from "./Spinner";
+import { updateCart } from "../../actions/cart";
 const { Content } = Layout;
 const { Option } = Select;
 
-const Product = ({ product: { loading, product } }) => {
+const Product = ({ product: { loading, product }, updateCart }) => {
+  const handleBuy = () => {
+    updateCart(product);
+  };
+
   return loading || product === null ? (
     <Spinner />
   ) : (
@@ -55,7 +60,9 @@ const Product = ({ product: { loading, product } }) => {
                 </Select>
               </Col>
               <Col span={8}>
-                <Button type="primary">Buy</Button>
+                <Button type="primary" onClick={handleBuy}>
+                  Buy
+                </Button>
               </Col>
             </Card>
           </Row>
@@ -81,11 +88,12 @@ const Product = ({ product: { loading, product } }) => {
 };
 
 Product.propTypes = {
-  product: PropTypes.object.isRequired
+  product: PropTypes.object.isRequired,
+  updateCart: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
   product: state.product
 });
 
-export default connect(mapStateToProps)(Product);
+export default connect(mapStateToProps, { updateCart })(Product);
